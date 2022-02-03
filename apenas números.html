@@ -1,0 +1,174 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Deixar apenas números no site</title> 
+        <!--- Fontes usadas pelo google, jquerry de entrada-->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>        
+        <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Bebas+Neue&display=swap" rel="stylesheet">
+        <script src="jquery-3.2.1.min.js"></script>
+    </head>
+    
+    <style>
+        /*font font-family: 'Bebas Neue', cursive;*/
+        /*Imagen inicial do site */
+        .ini {
+            background-image:url('inicio.jpg');
+            min-width: 100%;
+            height: 15vw;
+            background-position: center;
+            background-size: cover;
+            margin: -8px;
+            margin-top: 0%;        
+            
+        }
+        /* Cabeçalho de site*/
+        h1{
+            font font-family: 'Bebas Neue', cursive;
+            font-size: 4vw;
+            
+        }
+        /* resultado */
+        h2{
+            color: red;
+            color: red;
+            color: red;
+            color: red;
+            font-size: 2vw;
+            width: 527px;
+        
+        }
+        /* caixa de texto*/
+        .tx{
+            border-style: ridge;
+            border-radius: 2px;
+            font-size: 1vw;
+            width: 527px;}
+        
+        .over{
+        overflow: auto;
+        }
+        /* Rodapé*/
+        .footer {
+            
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            text-align: left;
+            font-size: 12px;
+            
+            }
+            
+        }
+    </style>
+    
+    <script>
+        /* função para esconder o botão de cópia*/
+        $("#bot2").ready(function(){
+            $("#bot2").hide();
+            
+            
+        });
+        $(document).ready(function() {
+        /*Clique no botão executar, executa a transformação do texto */
+            $( "#bot" ).click(function() {
+                
+            /* verifica e remove as saídas antigas do programa*/
+             if ($("#res") != null ) {
+                $("#res").remove();
+                } ;  
+                
+            /* realiza a entrada dos dados para o js*/
+            var texto=$("#entrada").val();
+            var numero="";
+          
+            /*procura os números no texto */
+            for(var i=0;i<texto.length;i++){
+                if(texto[i]=="0"||texto[i]=="1"||texto[i]=="2"||texto[i]=="3"||texto[i]=="4"||texto[i]=="5"||texto[i]=="6"||texto[i]=="7"||texto[i]=="8"||texto[i]=="9"){
+                numero=numero+texto[i];
+                };};
+                
+            /* Correção de erros de entrada*/    
+            if (texto==""){
+                numero="Sem texto.";
+            };
+            if (numero==""&&texto!=""){
+                numero="Texto sem números.";
+                
+            };
+                
+           /* adiciona resultado ao html*/
+            var $newd=("<h2 id='res'>"+numero+"</h2>");
+            $("#add").append($newd);
+                
+           /*muda a cor do resultado*/ if(numero[0]=="0"||numero[0]=="1"||numero[0]=="2"||numero[0]=="3"||numero[0]=="4"||numero[0]=="5"||numero[0]=="6"||numero[0]=="7"||numero[0]=="8"||numero[0]=="9"){
+                    $("h2").css({"color":"black"});
+                };
+                
+            /*mostra o botão de cópia*/
+            $("#bot2").show();
+            
+        });
+            
+        /*Entre= click no executar*/
+         $('#entrada').keypress(function(e){
+            if(e.keyCode==13){
+            $('#bot').click();}
+         });
+        /*Copiando dados de resultado pro clipboard*/    
+        $( "#bot2" ).click(function() {
+            var num=$("#res").text();
+            setClipboard(num);
+            
+        });
+            function setClipboard(text) {
+            var type = "text/plain";
+            var blob = new Blob([text], { type });
+            var data = [new ClipboardItem({ [type]: blob })];
+
+            navigator.clipboard.write(data).then(
+            function () {
+                /* success */
+               
+            },
+            function () {
+            /* failure */
+            }
+                )};
+        });
+    </script>
+    <!---->
+    <body>
+         <!--Imagen inicial do site -->
+        <div class="ini"></div>
+    
+        <!--/* Cabeçalho de site*/-->                  
+        <h1> Deixe apenas números em um texto:</h1>
+        
+        <!-- caixa de texto-->
+        <textarea id="entrada" name="entrada" rows="4" cols="70" placeholder="Digite aqui seu texto de entrada."class:"tx" ></textarea>
+        <div id="d1"></div>
+        <div> adssad
+            <button type="button" class="over" id="bot" overflow:"auto">Executar!</button>
+            
+             
+        <!--resultado-->
+        </div>
+        <div id="add">
+        
+        </div>
+        <!--Botão de cópia-->
+        <div> 
+            <button type="button" class="btn" id="bot2" overflow:"auto" >Copiar!</button>
+             
+        </div>
+        <!--Rodapé necessário por causa da imagem de stock--->
+        <div class="footer">
+            <a   href="https://www.vecteezy.com/free-vector/shapes">Shapes Vectors by Vecteezy</a>
+        </div>
+     
+        
+    </body>
+</html>
